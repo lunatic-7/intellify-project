@@ -1,0 +1,221 @@
+
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <title>Teachers</title>
+
+    <link rel="shortcut icon" href="{% static '/img/favicon.png' %}">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;0,600;0,700;1,400&amp;display=swap">
+
+    <link rel="stylesheet" href="{% static '/plugins/bootstrap/css/bootstrap.min.css' %}">
+
+    <link rel="stylesheet" href="{% static '/plugins/fontawesome/css/fontawesome.min.css' %}">
+    <link rel="stylesheet" href="{% static '/plugins/fontawesome/css/all.min.css' %}">
+
+    <link rel="stylesheet" href="{% static '/plugins/datatables/datatables.min.css' %}">
+
+    <link rel="stylesheet" href="{% static '/css/style.css' %}">
+</head>
+
+<body>
+
+    <div class="main-wrapper">
+
+        <div class="header">
+
+            <div class="header-left">
+                <a href="index.html" class="logo">
+                    <img src="{% static '/img/logo.png' %}" alt="Logo">
+                </a>
+                <a href="index.html" class="logo logo-small">
+                    <img src="{% static '/img/logo-small.png' %}" alt="Logo" width="30" height="30">
+                </a>
+            </div>
+
+            <a href="javascript:void(0);" id="toggle_btn">
+                <i class="fas fa-align-left"></i>
+            </a>
+
+            <div class="top-nav-search">
+                <form>
+                    <input type="text" class="form-control" placeholder="Search here">
+                    <button class="btn" type="submit"><i class="fas fa-search"></i></button>
+                </form>
+            </div>
+
+
+            <a class="mobile_btn" id="mobile_btn">
+                <i class="fas fa-bars"></i>
+            </a>
+
+
+            <ul class="nav user-menu">
+
+                <li class="nav-item dropdown has-arrow">
+                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                        <span class="user-img"><img class="rounded-circle"
+                                src="{% static '/img/profiles/avatar-01.jpg' %}" width="31" alt="Ryan Taylor"></span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <div class="user-header">
+                            <div class="avatar avatar-sm">
+                                <img src="{% static '/img/profiles/avatar-01.jpg' %}" alt="User Image"
+                                    class="avatar-img rounded-circle">
+                            </div>
+                            <div class="user-text">
+                                <h6>Ryan Taylor</h6>
+                            </div>
+                        </div>
+                        <a class="dropdown-item" href="/school/school-logout/">Logout</a>
+                    </div>
+                </li>
+
+            </ul>
+
+        </div>
+         <div class="sidebar" id="sidebar">
+            <div class="sidebar-inner slimscroll">
+               <div id="sidebar-menu" class="sidebar-menu">
+                  <ul>
+                     <li class="menu-title">
+                         <span>Main Menu</span>
+                     </li>
+
+                     <li class="submenu active">
+                         <a href="#"><i class="fas fa-user-graduate"></i> <span> Dashboard</span> <span
+                                 class="menu-arrow"></span></a>
+                         <ul>
+                             <li><a href="/teacher/"> Dashboard</a></li>
+                         </ul>
+                     </li>
+                     <li class="submenu">
+                         <a href="#"><i class="fas fa-user-graduate"></i> <span> Students</span> <span
+                                 class="menu-arrow"></span></a>
+                         <ul>
+                             <!--Edit/Ayon --> 
+                             <li><a href="/student/list?id={{school_id}}">Student List</a></li>
+                             <li><a href="/student/add?id={{school_id}}">Student Add</a></li>
+                             <li><a href="/student/add/upload?id={{school_id}}">Upload Student</a></li>
+                             <!-- Ayon -->
+                         </ul>
+                     </li>
+                     <li class="submenu active">
+                         <a href="#"><i class="fas fa-user-graduate"></i> <span> Profile</span> <span
+                                 class="menu-arrow"></span></a>
+                         <ul>
+                             <li><a href="/teacher/update"> Profile</a></li>
+                         </ul>
+                     </li>
+
+           
+                    
+                 </ul>
+               </div>
+            </div>
+         </div>
+
+
+        <div class="page-wrapper">
+            <div class="content container-fluid">
+
+                <div class="page-header">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h3 class="page-title">Students</h3>
+                            <ul class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                                <li class="breadcrumb-item active">Students</li>
+                            </ul>
+                        </div>
+                        <div class="col-auto text-right float-right ml-auto">
+                            <a href="#" class="btn btn-outline-primary mr-2"><i class="fas fa-download"></i>
+                                Download</a>
+                            <a href="add-teacher.html" class="btn btn-primary"><i class="fas fa-plus"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card card-table">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover table-center mb-0 datatable">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Gender</th>
+                                                <th>Class & Section</th>
+                                                <th>Roll Number</th>
+                                                <th>Phone</th>
+                                                <th class="text-right">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for x in student %}
+                                            <tr>
+                                                <td>
+                                                    <h2 class="table-avatar">
+                                                        <a href="/student/" class="avatar avatar-sm mr-2">
+                                                            <img class="avatar-img rounded-circle"
+                                                                src="/media/{{x.img}}"
+                                                                alt="student"></a>
+                                                        <a href="/student/profile?student_id={{x.id}}">{{x.full_name}}</a>
+                                                    </h2>
+                                                </td>
+                                                <td>{{x.gender}}</td>
+                                                <td>{{x.standard}}/{{x.section}}</td>
+                                                <td>{{x.roll_no}}</td>
+                                                <td>{{x.phone}}</td>
+                                                <td class="text-right">
+                                                    <div class="actions">
+                                                        <a href="/student/profile?student_id={{x.id}}"
+                                                            class="btn btn-sm bg-success-light mr-2">
+                                                            <i class="fas fa-pen"></i>
+                                                        </a>
+                                                        <a href="#" class="btn btn-sm bg-danger-light">
+                                                            <i class="fas fa-trash"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <footer>
+                <p>Copyright © 2020 Dreamguys.</p>
+            </footer>
+
+        </div>
+
+    </div>
+
+
+    <script src="{% static '/js/jquery-3.6.0.min.js' %}"></script>
+
+    <script src="{% static '/js/popper.min.js' %}"></script>
+    <script src="{% static '/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+
+    <script src="{% static '/plugins/slimscroll/jquery.slimscroll.min.js' %}"></script>
+
+    <script src="{% static '/plugins/datatables/datatables.min.js' %}"></script>
+
+    <script src="{% static '/js/script.js' %}"></script>
+</body>
+
+<!-- Mirrored from preschool.dreamguystech.com/html-template/teachers.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 28 Oct 2021 11:11:50 GMT -->
+
+</html>

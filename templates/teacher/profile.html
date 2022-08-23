@@ -1,0 +1,427 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from preschool.dreamguystech.com/html-template/teacher-details.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 28 Oct 2021 11:11:50 GMT -->
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <title>Teacher</title>
+
+    <link rel="shortcut icon" href="{% static '/img/favicon.png' %}">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;0,600;0,700;1,400&amp;display=swap">
+
+    <link rel="stylesheet" href="{% static '/plugins/bootstrap/css/bootstrap.min.css' %}">
+
+    <link rel="stylesheet" href="{% static '/plugins/fontawesome/css/fontawesome.min.css' %}">
+    <link rel="stylesheet" href="{% static '/plugins/fontawesome/css/all.min.css' %}">
+
+    <link rel="stylesheet" href="{% static '/plugins/datatables/datatables.min.css' %}">
+
+    <link rel="stylesheet" href="{% static '/css/style.css' %}">
+</head>
+
+<body>
+
+    <div class="main-wrapper">
+
+        <div class="header">
+
+            <div class="header-left">
+                <a href="index.html" class="logo">
+                    <img src="{% static '/img/logo.png' %}" alt="Logo">
+                </a>
+                <a href="index.html" class="logo logo-small">
+                    <img src="{% static '/img/logo-small.png' %}" alt="Logo" width="30" height="30">
+                </a>
+            </div>
+
+            <a href="javascript:void(0);" id="toggle_btn">
+                <i class="fas fa-align-left"></i>
+            </a>
+
+            <div class="top-nav-search">
+                <form>
+                    <input type="text" class="form-control" placeholder="Search here">
+                    <button class="btn" type="submit"><i class="fas fa-search"></i></button>
+                </form>
+            </div>
+
+
+            <a class="mobile_btn" id="mobile_btn">
+                <i class="fas fa-bars"></i>
+            </a>
+
+
+            <ul class="nav user-menu">
+
+                <li class="nav-item dropdown has-arrow">
+                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                        <span class="user-img"><img class="rounded-circle" src="{% static '/img/profiles/avatar-01.jpg' %}"
+                                width="31" alt="Ryan Taylor"></span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <div class="user-header">
+                            <div class="avatar avatar-sm">
+                                <img src="{% static '/img/profiles/avatar-01.jpg' %}" alt="User Image"
+                                    class="avatar-img rounded-circle">
+                            </div>
+                            <div class="user-text">
+                                <h6>Ryan Taylor</h6>
+                            </div>
+                        </div>
+                        <a class="dropdown-item" href="/school/school-logout">Logout</a>
+                    </div>
+                </li>
+
+            </ul>
+
+        </div>
+
+
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-inner slimscroll">
+                <div id="sidebar-menu" class="sidebar-menu">
+                    <ul>
+                        <li class="menu-title">
+                           <span>Main Menu</span>
+                        </li>
+                        <li class="submenu active">
+                           <a href="/school/"><i class="fas fa-user-graduate"></i> <span> Dashboard</span> <span
+                                 class="menu-arrow"></span></a>
+         
+                            <!--Comment/Ayon -->       
+                           <!-- <ul>
+                              <li><a href="{% url 'school_home' %}" class="active">School Dashboard</a></li>
+                              <li><a href="teacher-dashboard.html">Teacher Dashboard</a></li>
+                              <li><a href="student-dashboard.html">Student Dashboard</a></li>
+                           </ul> -->
+                           <!-- Ayon --> 
+                        </li>
+                        <li class="submenu">
+                           <a href="#"><i class="fas fa-building"></i> <span>School Profile</span> <span
+                                 class="menu-arrow"></span></a>
+                           <ul>
+                              <li><a href="{% url 'school_profile' %}">Your Profile</a></li>
+                              <li><a href="{% url 'school_profile_add' %}">Edit Profile</a></li>
+                              <!-- <li><a href="edit-department.html">Edit Profile</a></li> -->
+                           </ul>
+                        </li>
+                        <li class="submenu">
+                           <a href="#"><i class="fas fa-user-graduate"></i> <span> Students</span> <span
+                                 class="menu-arrow"></span></a>
+                           <ul>
+                              <!--Edit/Ayon --> 
+                              <li><a href="/student/list?id={{school_id}}">Student List</a></li>
+                              <li><a href="/student/add?id={{school_id}}">Student Add</a></li>
+                              <li><a href="/student/add/upload?id={{school_id}}">Upload Student</a></li>
+                              <!-- Ayon -->
+                           </ul>
+                        </li>
+                        <li class="submenu">
+                           <a href="#"><i class="fas fa-chalkboard-teacher"></i> <span> Teachers</span> <span
+                                 class="menu-arrow"></span></a>
+                           <ul>
+                              <!--Edit/Ayon --> 
+                              <li><a href="/teacher/list/">Teacher List</a></li>
+                              <li><a href="/teacher/add?id={{school_id}}">Teacher Add</a></li>
+                              <li><a href="/teacher/add/upload/?id={{school_id}}">Upload Teacher</a></li>
+                              <!-- Ayon --> 
+                           </ul>
+                        </li>
+                        <li class="submenu">
+                           <a href="#"><i class="fas fa-book-reader"></i> <span> Subjects</span> <span
+                                 class="menu-arrow"></span></a>
+                           <ul>
+                              <li><a href="subjects.html">Subject List</a></li>
+                              <li><a href="add-subject.html">Subject Add</a></li>
+                              <li><a href="edit-subject.html">Subject Edit</a></li>
+                           </ul>
+                        </li>
+                        <!-- <li class="menu-title">
+                           <span>Management</span>
+                        </li>
+                        <li class="submenu">
+                           <a href="#"><i class="fas fa-file-invoice-dollar"></i> <span> Accounts</span> <span
+                                 class="menu-arrow"></span></a>
+                           <ul>
+                              <li><a href="fees-collections.html">Fees Collection</a></li>
+                              <li><a href="expenses.html">Expenses</a></li>
+                              <li><a href="salary.html">Salary</a></li>
+                              <li><a href="add-fees-collection.html">Add Fees</a></li>
+                              <li><a href="add-expenses.html">Add Expenses</a></li>
+                              <li><a href="add-salary.html">Add Salary</a></li>
+                           </ul>
+                        </li>
+                        <li>
+                           <a href="holiday.html"><i class="fas fa-holly-berry"></i> <span>Holiday</span></a>
+                        </li>
+                        <li>
+                           <a href="fees.html"><i class="fas fa-comment-dollar"></i> <span>Fees</span></a>
+                        </li>
+                        <li>
+                           <a href="exam.html"><i class="fas fa-clipboard-list"></i> <span>Exam list</span></a>
+                        </li>
+                        <li>
+                           <a href="event.html"><i class="fas fa-calendar-day"></i> <span>Events</span></a>
+                        </li>
+                        <li>
+                           <a href="time-table.html"><i class="fas fa-table"></i> <span>Time Table</span></a>
+                        </li>
+                        <li>
+                           <a href="library.html"><i class="fas fa-book"></i> <span>Library</span></a>
+                        </li>
+                        <li class="menu-title">
+                           <span>Pages</span>
+                        </li>
+                        <li class="submenu">
+                           <a href="#"><i class="fas fa-shield-alt"></i> <span> Authentication </span> <span
+                                 class="menu-arrow"></span></a>
+                           <ul>
+                              <li><a href="login.html">Login</a></li>
+                              <li><a href="register.html">Register</a></li>
+                              <li><a href="forgot-password.html">Forgot Password</a></li>
+                              <li><a href="error-404.html">Error Page</a></li>
+                           </ul>
+                        </li>
+                        <li>
+                           <a href="blank-page.html"><i class="fas fa-file"></i> <span>Blank Page</span></a>
+                        </li>
+                        <li class="menu-title">
+                           <span>Others</span>
+                        </li>
+                        <li>
+                           <a href="sports.html"><i class="fas fa-baseball-ball"></i> <span>Sports</span></a>
+                        </li>
+                        <li>
+                           <a href="hostel.html"><i class="fas fa-hotel"></i> <span>Hostel</span></a>
+                        </li>
+                        <li>
+                           <a href="transport.html"><i class="fas fa-bus"></i> <span>Transport</span></a>
+                        </li>
+                        <li class="menu-title">
+                           <span>UI Interface</span>
+                        </li>
+                        <li>
+                           <a href="components.html"><i class="fas fa-vector-square"></i> <span>Components</span></a>
+                        </li>
+                        <li class="submenu">
+                           <a href="#"><i class="fas fa-columns"></i> <span> Forms </span> <span class="menu-arrow"></span></a>
+                           <ul>
+                              <li><a href="form-basic-inputs.html">Basic Inputs </a></li>
+                              <li><a href="form-input-groups.html">Input Groups </a></li>
+                              <li><a href="form-horizontal.html">Horizontal Form </a></li>
+                              <li><a href="form-vertical.html"> Vertical Form </a></li>
+                              <li><a href="form-mask.html"> Form Mask </a></li>
+                              <li><a href="form-validation.html"> Form Validation </a></li>
+                           </ul>
+                        </li>
+                        <li class="submenu">
+                           <a href="#"><i class="fas fa-table"></i> <span> Tables </span> <span class="menu-arrow"></span></a>
+                           <ul>
+                              <li><a href="tables-basic.html">Basic Tables </a></li>
+                              <li><a href="data-tables.html">Data Table </a></li>
+                           </ul>
+                        </li>
+                        <li class="submenu">
+                           <a href="javascript:void(0);"><i class="fas fa-code"></i> <span>Multi Level</span> <span
+                                 class="menu-arrow"></span></a>
+                           <ul>
+                              <li class="submenu">
+                                 <a href="javascript:void(0);"> <span>Level 1</span> <span class="menu-arrow"></span></a>
+                                 <ul>
+                                    <li><a href="javascript:void(0);"><span>Level 2</span></a></li>
+                                    <li class="submenu">
+                                       <a href="javascript:void(0);"> <span> Level 2</span> <span class="menu-arrow"></span></a>
+                                       <ul>
+                                          <li><a href="javascript:void(0);">Level 3</a></li>
+                                          <li><a href="javascript:void(0);">Level 3</a></li>
+                                       </ul>
+                                    </li>
+                                    <li><a href="javascript:void(0);"> <span>Level 2</span></a></li>
+                                 </ul>
+                              </li>
+                              <li>
+                                 <a href="javascript:void(0);"> <span>Level 1</span></a>
+                              </li>
+                           </ul>
+                        </li> -->
+                     </ul>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="page-wrapper">
+            <div class="content container-fluid">
+                <div class="page-header">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h3 class="page-title">Teachers Profile</h3>
+                            <!-- <ul class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="teachers.html">Teachers</a></li>
+                                <li class="breadcrumb-item active">Teachers Details</li>
+                            </ul> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="about-info">
+                                    <h4>Teacher</h4>
+                                    <div class="media mt-3">
+                                        <img src="/media/{{teacher.img}}" class="mr-3" alt="...">
+                                        <div class="media-body">
+                                            <ul>
+                                                <li>
+                                                    <span class="title-span">Full Name : </span>
+                                                    <span class="info-span">{{teacher.full_name}}</span>
+                                                </li>
+                                                <!-- <li>
+                                                    <span class="title-span">Department : </span>
+                                                    <span class="info-span">Computer Science</span>
+                                                </li> -->
+                                                <li>
+                                                    <span class="title-span">Mobile : </span>
+                                                    <span class="info-span">{{teacher.phone}}</span>
+                                                </li>
+                                                <li>
+                                                    <span class="title-span">Email : </span>
+                                                    <span class="info-span"><a href="mailto:{{teacher.user.email}}">{{teacher.user.email}}</a></span>
+                                                </li>
+                                                <li>
+                                                    <span class="title-span">Gender : </span>
+                                                    <span class="info-span">{{teacher.gender}}</span>
+                                                </li>
+                                                <!-- <li>
+                                                    <span class="title-span">DOB : </span>
+                                                    <span class="info-span">22 Apr 1995</span>
+                                                </li> -->
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="row mt-3">
+                                        <div class="col-md-12">
+                                            <p>Hello I am Daisy Parks. Lorem Ipsum is simply dummy text of the printing
+                                                and typesetting industry, simply dummy text of the printing and
+                                                typesetting industry.</p>
+                                        </div>
+                                    </div> -->
+                                    <div class="row follow-sec">
+                                        <div class="col-md-4 mb-3">
+                                            <div class="blue-box">
+                                                <h3>2850</h3>
+                                                <p>Students</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <div class="blue-box">
+                                                <h3>2050</h3>
+                                                <p>Quizes</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <div class="blue-box">
+                                                <h3>2950</h3>
+                                                <p>Exams</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-2">
+                                        <div class="col-md-12">
+                                            <h5>Permanent Address</h5>
+                                            <p>{{teacher.address}}, {{teacher.zipcode}}, India</p>
+                                        </div>
+                                    </div>
+         
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-12">
+                                <div class="skill-info">
+                                    <h4>About</h4>
+                                    <!-- <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry, simply
+                                        dummy text of the printing and typesetting industry</p>
+                                    <ul>
+                                        <li>
+                                            <label>Lorem Ipsum is simply</label>
+                                            <div class="progress">
+                                                <div class="progress-bar progress-bar-striped progress-bar-animated"
+                                                    role="progressbar" aria-valuenow="75" aria-valuemin="0"
+                                                    aria-valuemax="100" style="width: 75%"></div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <label>Lorem Ipsum is simply</label>
+                                            <div class="progress">
+                                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-success"
+                                                    role="progressbar" aria-valuenow="69" aria-valuemin="0"
+                                                    aria-valuemax="100" style="width: 69%"></div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <label>Lorem Ipsum is simply</label>
+                                            <div class="progress">
+                                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-info"
+                                                    role="progressbar" aria-valuenow="86" aria-valuemin="0"
+                                                    aria-valuemax="100" style="width: 86%"></div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <label>Lorem Ipsum is simply</label>
+                                            <div class="progress">
+                                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning"
+                                                    role="progressbar" aria-valuenow="65" aria-valuemin="0"
+                                                    aria-valuemax="100" style="width: 65%"></div>
+                                            </div>
+                                        </li>
+                                    </ul> -->
+                                    <div class="row mt-3">
+                                        <div class="col-md-12">
+                                            <h5>Qualification</h5>
+                                            <p class="mt-3">{{teacher.qualification}}.</p>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-md-12">
+                                            <h5>Experience</h5>
+                                            <p class="mt-3">{{teacher.experience}}.</p>
+                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <footer>
+                <p>Copyright © 2020 Dreamguys.</p>
+            </footer>
+
+        </div>
+
+    </div>
+
+
+    <script data-cfasync="false" src="{% static '../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js' %}"></script>
+    <script src="{% static '/js/jquery-3.6.0.min.js' %}"></script>
+
+    <script src="{% static '/js/popper.min.js' %}"></script>
+    <script src="{% static '/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+
+    <script src="{% static '/plugins/slimscroll/jquery.slimscroll.min.js' %}"></script>
+
+    <script src="{% static '/js/script.js' %}"></script>
+</body>
+
+<!-- Mirrored from preschool.dreamguystech.com/html-template/teacher-details.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 28 Oct 2021 11:11:50 GMT -->
+
+</html>

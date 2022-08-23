@@ -1,0 +1,73 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block title %} School-Registration {% endblock title %}
+
+{% block body %}
+
+<div class="main-wrapper login-body">
+    <div class="login-wrapper">
+        <div class="container">
+            <div class="loginbox">
+                <div class="login-left">
+                    <img class="img-fluid" src="{% static 'img/logo-white.png' %}" alt="Logo">
+                </div>
+                <div class="login-right">
+                    <div class="login-right-wrap">
+                        <h1>Register</h1>
+                        <p class="account-subtitle">Access to our dashboard</p>
+
+                        <form action="" method="post">{% csrf_token %}
+                            <div class="form-group">
+                                <input class="form-control" type="text" name="username" placeholder="Username" required>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" type="text" name="school_name" placeholder="School Name"
+                                    required>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" type="text" name="school_email" placeholder="School Email"
+                                    required>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" type="text" name="pass1" placeholder="Password" required>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" type="text" name="pass2" placeholder="Confirm Password"
+                                    required>
+                            </div>
+                            <div class="form-group mb-0">
+                                <button class="btn btn-primary btn-block" type="submit">Register</button>
+                            </div>
+                        </form>
+
+                        <!-- <div class="login-or">
+                            <span class="or-line"></span>
+                            <span class="span-or">or</span>
+                        </div>
+
+                        <div class="social-login">
+                            <span>Register with</span>
+                            <a href="#" class="facebook"><i class="fab fa-facebook-f"></i></a><a href="#"
+                                class="google"><i class="fab fa-google"></i></a>
+                        </div> -->
+                        {% if messages %}
+                        <ul class="messages">
+                            {% for message in messages %}
+                            <li {% if message.tags %}
+                                class="{% if message.tags == 'success' %} text-success {% elif message.tags == 'info' %} text-primary {% else %} text-danger {% endif %}"
+                                {% endif %}>{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+
+                        <div class="text-center dont-have">Already have an account? <a
+                                href="{% url 'school_login' %}">Login</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock body %}
